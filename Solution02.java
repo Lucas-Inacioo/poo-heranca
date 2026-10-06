@@ -1,47 +1,53 @@
 import java.util.*;
 
-abstract class Book {
-    String title;
-    String author;
+// Escreva a classe Book aqui
+    // Declare os atributos title, author e price como private
+    // Escreva o construtor que recebe title, author e price
+    // Escreva os métodos getTitle(), getAuthor() e getPrice()
 
-    Book(String title, String author) {
-        this.title = title;
-        this.author = author;
-    }
+// Escreva a classe PrintedBook aqui, herdando de Book
+    // Declare o atributo pages como private
+    // Escreva o construtor que recebe title, author, price e pages
+    // Escreva o método getPages()
 
-    abstract void display();
-}
-
-// Declare a classe MyBook aqui. Não use o modificador de acesso 'public'.
-    // Declare o atributo price
-
-    /**
-    *   Construtor da classe
-    *
-    *   @param title O título do livro.
-    *   @param author O autor do livro.
-    *   @param price O preço do livro.
-    **/
-    // Escreva o construtor aqui
-
-    /**
-    *   Nome do método: display
-    *
-    *   Imprime o título, o autor e o preço no formato especificado.
-    **/
-    // Escreva o método aqui
-
-// Fim da classe
+// Escreva a classe Ebook aqui, herdando de Book
+    // Declare o atributo watermark como private
+    // Escreva o construtor que recebe title, author e price
+    // Escreva os métodos setWatermark(String watermark) e getWatermark()
 
 public class Solution02 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String title = scanner.nextLine();
-        String author = scanner.nextLine();
-        int price = scanner.nextInt();
-        scanner.close();
+        int n = Integer.parseInt(scanner.nextLine().trim());
 
-        Book book = new MyBook(title, author, price);
-        book.display();
+        for (int i = 0; i < n; i++) {
+            String type = scanner.nextLine().trim();
+            String title = scanner.nextLine();
+            String author = scanner.nextLine();
+            int price = Integer.parseInt(scanner.nextLine().trim());
+
+            if (type.equals("PRINTED")) {
+                int pages = Integer.parseInt(scanner.nextLine().trim());
+                PrintedBook book = new PrintedBook(title, author, price, pages);
+                System.out.println("Type: Printed");
+                printBook(book);
+                System.out.println("Pages: " + book.getPages());
+            } else {
+                String watermark = scanner.nextLine();
+                Ebook book = new Ebook(title, author, price);
+                book.setWatermark(watermark);
+                System.out.println("Type: Ebook");
+                printBook(book);
+                System.out.println("Watermark: " + book.getWatermark());
+            }
+        }
+        scanner.close();
+    }
+
+    // Recebe qualquer livro, seja impresso ou digital
+    static void printBook(Book book) {
+        System.out.println("Title: " + book.getTitle());
+        System.out.println("Author: " + book.getAuthor());
+        System.out.println("Price: " + book.getPrice());
     }
 }
