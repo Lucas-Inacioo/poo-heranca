@@ -6,4 +6,4 @@ Arquivos-base dos exercícios da lista de herança. Baixe o arquivo do exercíci
 |---|---|
 | Solution01.java | Classificação de um estudante |
 | Solution02.java | Cadastro de livros impressos e digitais |
-| Solution03.java | Ordenação de jogadores |
+| Solution03.java | Folha de pagamento de horistas |

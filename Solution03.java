@@ -1,33 +1,64 @@
 import java.util.*;
 
-// Escreva a classe Checker aqui
+class Employee {
+    private final String firstName;
+    private final String lastName;
+    private final String socialSecurityNumber;
 
-class Player {
-    String name;
-    int score;
+    public Employee(String firstName, String lastName, String socialSecurityNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
 
-    Player(String name, int score) {
-        this.name = name;
-        this.score = score;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getSocialSecurityNumber() {
+        return socialSecurityNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s %s%n%s: %s", "employee", getFirstName(), getLastName(),
+            "social security number", getSocialSecurityNumber());
     }
 }
 
+// Escreva a classe HourlyEmployee aqui, herdando de Employee
+    // Declare os atributos wage e hours como private
+    // Escreva o construtor que recebe firstName, lastName, socialSecurityNumber, wage e hours
+    // Escreva os métodos setWage, getWage, setHours e getHours
+    // Escreva o método earnings
+    // Sobrescreva o método toString
+
 public class Solution03 {
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-
-        Player[] player = new Player[n];
-        Checker checker = new Checker();
+        // Garante o ponto como separador decimal, qualquer que seja o idioma do computador
+        Locale.setDefault(Locale.US);
+        Scanner scanner = new Scanner(System.in);
+        int n = Integer.parseInt(scanner.next());
 
         for (int i = 0; i < n; i++) {
-            player[i] = new Player(scan.next(), scan.nextInt());
-        }
-        scan.close();
+            String firstName = scanner.next();
+            String lastName = scanner.next();
+            String socialSecurityNumber = scanner.next();
+            double wage = Double.parseDouble(scanner.next());
+            double hours = Double.parseDouble(scanner.next());
 
-        Arrays.sort(player, checker);
-        for (int i = 0; i < player.length; i++) {
-            System.out.printf("%s %s\n", player[i].name, player[i].score);
+            try {
+                HourlyEmployee employee = new HourlyEmployee(firstName, lastName, socialSecurityNumber, wage, hours);
+                System.out.println(employee);
+                System.out.printf("earnings: %.2f%n", employee.earnings());
+            } catch (IllegalArgumentException e) {
+                System.out.println("invalid employee: " + e.getMessage());
+            }
         }
+        scanner.close();
     }
 }
